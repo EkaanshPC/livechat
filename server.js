@@ -26,7 +26,7 @@ io.on("connection",(socket)=>{
     if(typeof message !== "string")return socket.emit("unsuccessful-send-message", "message not a string")
     if(message.length>max_message_length)return socket.emit("unsuccessful-send-message", "message exceeded max message length")
     chat.push(user + ": " + message)
-    io.emit("new-message",user + ": " + message)
+    io.emit("new-message",{user,message})
     if(chat.length>chat_store_limit){
       while(chat.length>chat_store_limit){
         chat.shift()
