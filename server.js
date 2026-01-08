@@ -72,6 +72,11 @@ io.on("connection", (socket) => {
     // broadcast typing status to this chat only
     io.to(chatName).emit("typing-update", { chatName, username, bool });
   });
+// =================== GET ALL CHATS
+socket.on("get-chats", () => {
+  const chatList = Object.keys(chat); // all chat names
+  socket.emit("all-chats", chatList);
+});
 
   // ================= HANDLE DISCONNECT
   socket.on("disconnecting", () => {
